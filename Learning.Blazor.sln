@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.Blazor", "Learning
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.Blazor.Shared", "Learning.Blazor.Shared\Learning.Blazor.Shared.csproj", "{9EC1F238-25BA-4517-92E4-4FB31EEC6EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.Blazor.Api", "Learning.Blazor.Api\Learning.Blazor.Api.csproj", "{6E0C07CC-7751-4CAA-800D-0D73CBE3438D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.Blazor.Api", "Learning.Blazor.Api\Learning.Blazor.Api.csproj", "{6E0C07CC-7751-4CAA-800D-0D73CBE3438D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

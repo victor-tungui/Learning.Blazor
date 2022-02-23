@@ -24,20 +24,12 @@ public class EmployeeDataService : IEmployeeDataService
 
 	public async Task<IEnumerable<Employee>> GetAllEmployees()
 	{
-		//try
-		//{
+
 		Stream stream = await _httpClient.GetStreamAsync($"api/employee");
 
 		IEnumerable<Employee> employees = await JsonSerializer.DeserializeAsync<IEnumerable<Employee>>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
 		return employees;
-		//}
-		//catch (Exception ex)
-		//{
-		//	string message = ex.Message;
-		//}
-
-		//return null;
 	}
 
 	public async Task<Employee> GetEmployeeDetails(int employeeId)
