@@ -1,4 +1,5 @@
 ﻿using Learning.Blazor.Shared;
+using System.Text;
 using System.Text.Json;
 
 namespace Learning.Blazor.Services;
@@ -12,14 +13,25 @@ public class EmployeeDataService : IEmployeeDataService
 		this._httpClient = httpClient;
 	}
 
-	public Task<Employee> AddEmployee(Employee employee)
+	public async Task<Employee> AddEmployee(Employee employee)
 	{
-		throw new NotImplementedException();
+		var employeeJson = JsonSerializer.Serialize(employee);
+
+		var content = new StringContent(employeeJson, Encoding.UTF8, "application/json");
+
+		var response = await _httpClient.PostAsync("api/employee", content);
+
+		if (response.IsSuccessStatusCode)
+		{
+			return await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
+		}
+
+		return null;
 	}
 
-	public Task DeleteEmployee(int employeeId)
+	public async Task DeleteEmployee(int employeeId)
 	{
-		throw new NotImplementedException();
+		await _httpClient.DeleteAsync($"api/employee/{employeeId}");
 	}
 
 	public async Task<IEnumerable<Employee>> GetAllEmployees()
@@ -41,9 +53,20 @@ public class EmployeeDataService : IEmployeeDataService
 		return employee;
 	}
 
-	public Task UpdateEmployee(Employee employee)
+	public async Task UpdateEmployee(Employee employee)
 	{
-		throw new NotImplementedException();
+		var employeeJson = JsonSerializer.Serialize(employee);
+		var content = new StringContent(employeeJson, Encoding.UTF8, "application/json");
+		
+		HttpResponseMessage response = await _httpClient.PutAsync("api/employee", content);
+
+		if (response.IsSuccessStatusCode)
+		{
+			return;
+		}
+
+		string responseContent = await response.Content.ReadAsStringAsync();
+		return;
 	}
 }
 
